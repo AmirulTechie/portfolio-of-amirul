@@ -125,7 +125,7 @@ export default function HeroBanner() {
       </div>
 
       {/* Right: Image area */}
-      <div className="relative z-2 w-full md:w-[45%] h-105 md:h-[80vh] max-h-155 shrink-0">
+      <div className="relative z-[2] w-full md:w-[45%] h-105 md:h-[80vh] max-h-155 shrink-0">
 
         {/* Chip 1 — top left: component render count */}
         <div

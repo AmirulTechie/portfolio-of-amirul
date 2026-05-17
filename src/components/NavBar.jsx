@@ -74,17 +74,19 @@ export default function NavBar() {
         </ul>
 
         {/* Download CV */}
-<a href="/amirul-islam-resume.pdf" download
-  className="glow-btn hidden md:flex items-center gap-2 border border-white/25 hover:border-white/60 hover:bg-white/5 text-white text-[11px] uppercase tracking-widest px-4 py-2 transition-all duration-200 no-underline"
->
-  <svg width="11" height="13" viewBox="0 0 11 13" fill="none">
-    <rect x="0.5" y="0.5" width="10" height="12" rx="1.5" stroke="white" strokeOpacity="0.7" />
-    <line x1="2.5" y1="4.5" x2="8.5" y2="4.5" stroke="white" strokeOpacity="0.7" />
-    <line x1="2.5" y1="6.5" x2="8.5" y2="6.5" stroke="white" strokeOpacity="0.7" />
-    <line x1="2.5" y1="8.5" x2="5.5" y2="8.5" stroke="white" strokeOpacity="0.7" />
-  </svg>
-  [ Download_CV ]
-</a>
+        <a
+          href="/amirul-islam-resume.pdf"
+          download
+          className="glow-btn hidden md:flex items-center gap-2 border border-white/25 hover:border-white/60 hover:bg-white/5 text-white text-[11px] uppercase tracking-widest px-4 py-2 transition-all duration-200 no-underline"
+        >
+          <svg width="11" height="13" viewBox="0 0 11 13" fill="none">
+            <rect x="0.5" y="0.5" width="10" height="12" rx="1.5" stroke="white" strokeOpacity="0.7" />
+            <line x1="2.5" y1="4.5" x2="8.5" y2="4.5" stroke="white" strokeOpacity="0.7" />
+            <line x1="2.5" y1="6.5" x2="8.5" y2="6.5" stroke="white" strokeOpacity="0.7" />
+            <line x1="2.5" y1="8.5" x2="5.5" y2="8.5" stroke="white" strokeOpacity="0.7" />
+          </svg>
+          [ Download_CV ]
+        </a>
         {/* Mobile Hamburger */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
@@ -139,7 +141,7 @@ export default function NavBar() {
           </a>
         ))}
         <a
-          href="/cv.pdf"
+          href="/amirul-islam-resume.pdf"
           download
           className="self-start border border-white/20 text-white text-[11px] uppercase tracking-widest px-4 py-2 mt-1 no-underline"
         >
