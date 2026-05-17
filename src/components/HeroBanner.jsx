@@ -9,6 +9,7 @@ export default function HeroBanner() {
   const chip1Ref = useRef(null);
   const chip2Ref = useRef(null);
   const chip3Ref = useRef(null);
+  const chip4Ref = useRef(null);
   const label1Ref = useRef(null);
   const label2Ref = useRef(null);
   const tagRef = useRef(null);
@@ -32,60 +33,19 @@ export default function HeroBanner() {
     };
     window.addEventListener("mousemove", handleMouseMove);
 
-    // --- Entry animations (left content) ---
-    gsap.fromTo(
-      tagRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.1 }
-    );
-    gsap.fromTo(
-      headingRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.25 }
-    );
-    gsap.fromTo(
-      subRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.4 }
-    );
-    gsap.fromTo(
-      btnsRef.current,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.55 }
-    );
+    // --- Entry animations ---
+    gsap.fromTo(tagRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.1 });
+    gsap.fromTo(headingRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out", delay: 0.25 });
+    gsap.fromTo(subRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.4 });
+    gsap.fromTo(btnsRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", delay: 0.55 });
 
-    // --- Endless floating: chip1 (status 200) ---
-    gsap.to(chip1Ref.current, {
-      y: -10,
-      duration: 2.8,
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: -1,
-    });
+    // --- Chip floating animations (all offset so they never sync) ---
+    gsap.to(chip1Ref.current, { y: -10, duration: 2.8, ease: "sine.inOut", yoyo: true, repeat: -1 });
+    gsap.to(chip2Ref.current, { y: 12, x: -4, duration: 3.4, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 0.5 });
+    gsap.to(chip3Ref.current, { y: -8, x: 5, duration: 3.1, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 1 });
+    gsap.to(chip4Ref.current, { y: 8, duration: 2.5, ease: "sine.inOut", yoyo: true, repeat: -1, delay: 0.8 });
 
-    // --- Endless floating: code card (offset timing) ---
-    gsap.to(chip2Ref.current, {
-      y: 12,
-      x: -4,
-      duration: 3.4,
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: -1,
-      delay: 0.5,
-    });
-
-    // --- Endless floating: bottom-right chip ---
-    gsap.to(chip3Ref.current, {
-      y: -8,
-      x: 5,
-      duration: 3.1,
-      ease: "sine.inOut",
-      yoyo: true,
-      repeat: -1,
-      delay: 1,
-    });
-
-    // --- Labels: subtle pulse opacity ---
+    // --- Labels pulse ---
     gsap.to([label1Ref.current, label2Ref.current], {
       opacity: 0.45,
       duration: 2.5,
@@ -138,9 +98,9 @@ export default function HeroBanner() {
           className="m-0 text-[13px] leading-[1.8] text-white/50 font-light opacity-0"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          Frontend Developer crafting precise, scalable web apps
+          Frontend Developer focused on fast UIs, clean code,
           <br className="hidden md:block" />
-          and turning complex problems into elegant experiences.
+          and experiences that just work.
         </p>
 
         <div
@@ -164,35 +124,42 @@ export default function HeroBanner() {
         </div>
       </div>
 
-      {/* Right: Image */}
+      {/* Right: Image area */}
       <div className="relative z-2 w-full md:w-[45%] h-105 md:h-[80vh] max-h-155 shrink-0">
 
-        {/* Floating chip top-left */}
+        {/* Chip 1 — top left: component render count */}
         <div
           ref={chip1Ref}
-          className="absolute top-[10%] left-[-5%] bg-[#141414]/90 border border-white/8 backdrop-blur-md px-3 py-2 z-3 hidden md:block"
+          className="absolute top-[8%] left-[-4%] bg-[#141414]/90 border border-white/[0.08] backdrop-blur-md px-3 py-2 z-[3] hidden md:block"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <span className="text-white/55 text-[11px] tracking-[0.04em]">
-            {"{ status: 200 }"}
+          <span className="text-white/25 text-[9px] tracking-[0.08em] block mb-0.5">// COMPONENT</span>
+          <span className="text-white/60 text-[11px] tracking-[0.04em]">
+            &lt;Hero <span className="text-white/35">render</span>=<span className="text-green-400/80">true</span> /&gt;
           </span>
         </div>
 
-        {/* Code card */}
+        {/* Chip 2 — code card: styling snippet */}
         <div
           ref={chip2Ref}
-          className="absolute top-[15%] left-[4%] bg-[#0e0e0e]/90 border border-white/[0.07] backdrop-blur-md p-3 w-[180px] z-[4] hidden md:block"
+          className="absolute top-[20%] left-[3%] bg-[#0e0e0e]/90 border border-white/[0.07] backdrop-blur-md p-3 w-[190px] z-[4] hidden md:block"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <p className="text-white/30 text-[10px] tracking-[0.06em] m-0 mb-2">
-            // INIT_SESSION
+          <p className="text-white/25 text-[9px] tracking-[0.08em] m-0 mb-2">
+            // STYLES.CSS
           </p>
-          <div className="flex items-start gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-400 mt-1 flex-shrink-0" />
-            <span className="text-white/65 text-[11px]">
-              Authorized // build_
-              <br />
-              <span className="pl-3">deploy()</span>
+          <div className="flex flex-col gap-0.5">
+            <span className="text-white/50 text-[10.5px]">
+              <span className="text-white/30">display:</span>{" "}
+              <span className="text-sky-400/70">flex</span>;
+            </span>
+            <span className="text-white/50 text-[10.5px]">
+              <span className="text-white/30">gap:</span>{" "}
+              <span className="text-orange-300/70">1rem</span>;
+            </span>
+            <span className="text-white/50 text-[10.5px]">
+              <span className="text-white/30">border-radius:</span>{" "}
+              <span className="text-orange-300/70">8px</span>;
             </span>
           </div>
         </div>
@@ -216,14 +183,34 @@ export default function HeroBanner() {
           />
         </div>
 
-        {/* Bottom-right chip */}
+        {/* Chip 3 — bottom right: performance score */}
         <div
           ref={chip3Ref}
-          className="absolute bottom-[12%] right-[-2%] bg-[#141414]/90 border border-white/[0.08] backdrop-blur-md px-3 py-2 z-[3] hidden md:block"
+          className="absolute bottom-[18%] right-[-3%] bg-[#141414]/90 border border-white/[0.08] backdrop-blur-md px-3 py-2 z-[3] hidden md:block"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <span className="text-white/55 text-[11px] block">db.connect()</span>
-          <span className="text-white/55 text-[11px] block">core.loaded()</span>
+          <span className="text-white/25 text-[9px] tracking-[0.08em] block mb-1">// LIGHTHOUSE</span>
+          <span className="text-white/55 text-[11px] block">
+            performance:{" "}
+            <span className="text-green-400/80">98</span>
+          </span>
+          <span className="text-white/55 text-[11px] block">
+            accessibility:{" "}
+            <span className="text-green-400/80">100</span>
+          </span>
+        </div>
+
+        {/* Chip 4 — mid right: bundle size */}
+        <div
+          ref={chip4Ref}
+          className="absolute top-[52%] right-[-1%] bg-[#0e0e0e]/90 border border-white/[0.07] backdrop-blur-md px-3 py-1.5 z-[3] hidden md:block"
+          style={{ fontFamily: "'JetBrains Mono', monospace" }}
+        >
+          <span className="text-white/25 text-[9px] tracking-[0.08em] block mb-0.5">bundle.js</span>
+          <span className="text-white/55 text-[11px]">
+            <span className="text-sky-400/70">42kb</span>{" "}
+            <span className="text-white/25">gzipped</span>
+          </span>
         </div>
 
         {/* Labels */}
@@ -232,7 +219,7 @@ export default function HeroBanner() {
           className="absolute bottom-[4%] left-[8%] text-white/22 text-[9.5px] tracking-[0.1em] uppercase z-[3]"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          ▣ MongoDB
+          ▣ Tailwind CSS
         </span>
         <span
           ref={label2Ref}

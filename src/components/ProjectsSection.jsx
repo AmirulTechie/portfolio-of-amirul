@@ -1,5 +1,11 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const projects = [
   {
     image: "/tilevo.png",
@@ -40,39 +46,128 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
+  const sectionRef = useRef(null);
+  const labelRef = useRef(null);
+  const underlineRef = useRef(null);
+  const headingRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // --- Label ---
+      gsap.fromTo(
+        labelRef.current,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: labelRef.current,
+            start: "top 85%",
+          },
+        }
+      );
+
+      // --- Underline reveal ---
+      gsap.fromTo(
+        underlineRef.current,
+        { scaleX: 0, transformOrigin: "left" },
+        {
+          scaleX: 1,
+          duration: 0.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: underlineRef.current,
+            start: "top 85%",
+          },
+        }
+      );
+
+      // --- Heading ---
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: "top 85%",
+          },
+        }
+      );
+
+      // --- Cards: staggered fade up ---
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: cardsRef.current[0],
+            start: "top 88%",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="projects"
       className="bg-[#080808] min-h-screen px-[5%] py-24"
       style={{ fontFamily: "'Syne', sans-serif" }}
     >
       {/* Section label */}
       <p
-        className="text-white/30 text-[11px] tracking-[0.15em] uppercase m-0 mb-2"
+        ref={labelRef}
+        className="text-white/30 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
         style={{ fontFamily: "'JetBrains Mono', monospace" }}
       >
         / SELECTED WORK
       </p>
-      <div className="w-10 h-px bg-white/15 mb-10" />
+      <div
+        ref={underlineRef}
+        className="w-10 h-px bg-white/15 mb-10"
+        style={{ transform: "scaleX(0)", transformOrigin: "left" }}
+      />
 
       {/* Heading */}
-      <h2 className="text-white text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.02em] m-0 mb-16">
+      <h2
+        ref={headingRef}
+        className="text-white text-[clamp(2rem,5vw,3.5rem)] font-bold tracking-[-0.02em] m-0 mb-16 opacity-0"
+      >
         Building Digital Frontiers
       </h2>
 
       {/* Projects grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {projects.map((project, i) => (
-          <ProjectCard key={i} project={project} />
+          <ProjectCard
+            key={i}
+            project={project}
+            cardRef={(el) => (cardsRef.current[i] = el)}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, cardRef }) {
   return (
-    <div className="flex flex-col gap-5 group">
+    <div ref={cardRef} className="flex flex-col gap-5 group opacity-0">
       {/* Image */}
       <div className="relative overflow-hidden bg-white/5 aspect-[4/3]">
         <img
@@ -80,7 +175,6 @@ function ProjectCard({ project }) {
           alt={project.title}
           className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
-        {/* Subtle dark overlay on hover */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
       </div>
 
