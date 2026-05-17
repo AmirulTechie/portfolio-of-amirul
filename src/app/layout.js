@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
       }
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <Analytics></Analytics>
         <NavBar></NavBar>
         {children}
         </body>
