@@ -6,41 +6,74 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const skills = [
+const skillCategories = [
   {
-    label: "Language",
-    items: ["HTML/CSS", "JavaScript", "TypeScript"],
+    id: "01",
+    category: "Language",
+    desc: "The foundation everything is built on.",
+    skills: [
+      { name: "HTML / CSS", level: 90 },
+      { name: "JavaScript", level: 85 },
+      { name: "TypeScript", level: 65 },
+    ],
   },
   {
-    label: "Frontend",
-    items: ["React", "Next.js", "Tailwind", "Framer Motion"],
+    id: "02",
+    category: "Frontend",
+    desc: "Where logic meets the user's eye.",
+    skills: [
+      { name: "React", level: 82 },
+      { name: "Next.js", level: 75 },
+      { name: "Tailwind CSS", level: 88 },
+      { name: "Framer Motion", level: 60 },
+    ],
   },
   {
-    label: "Backend",
-    items: ["Node.js", "Express.js", "JWT", "REST API"],
+    id: "03",
+    category: "Backend",
+    desc: "The engine running under the hood.",
+    skills: [
+      { name: "Node.js", level: 70 },
+      { name: "Express.js", level: 68 },
+      { name: "JWT / Auth", level: 65 },
+      { name: "REST API", level: 75 },
+    ],
   },
   {
-    label: "Database",
-    items: ["MongoDB", "Mongoose", "PostgreSQL"],
+    id: "04",
+    category: "Database",
+    desc: "Storing and structuring data efficiently.",
+    skills: [
+      { name: "MongoDB", level: 72 },
+      { name: "Mongoose", level: 70 },
+      { name: "PostgreSQL", level: 50 },
+    ],
   },
   {
-    label: "Tools & Deployment",
-    items: ["Git", "GitHub", "Vercel", "Render", "Figma"],
+    id: "05",
+    category: "Tools & Deployment",
+    desc: "Shipping fast, deploying clean.",
+    skills: [
+      { name: "Git / GitHub", level: 80 },
+      { name: "Vercel", level: 85 },
+      { name: "Render", level: 70 },
+      { name: "Figma", level: 60 },
+    ],
   },
 ];
 
 export default function SkillsSection() {
   const sectionRef = useRef(null);
   const [dotProgress, setDotProgress] = useState(0);
-
   const labelRef = useRef(null);
   const underlineRef = useRef(null);
   const headingRef = useRef(null);
   const subRef = useRef(null);
-  const skillRowsRef = useRef([]);
+  const cardsRef = useRef([]);
+  const barsRef = useRef([]);
 
   useEffect(() => {
-    // --- Scroll progress dot ---
+    // Scroll progress dot
     const handleScroll = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
@@ -54,85 +87,47 @@ export default function SkillsSection() {
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     const ctx = gsap.context(() => {
-      // --- Section label ---
-      gsap.fromTo(
-        labelRef.current,
+      gsap.fromTo(labelRef.current,
         { opacity: 0, x: -20 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: labelRef.current,
-            start: "top 85%",
-          },
-        }
+        { opacity: 1, x: 0, duration: 0.6, ease: "power3.out",
+          scrollTrigger: { trigger: labelRef.current, start: "top 85%" } }
       );
 
-      // --- Underline width reveal ---
-      gsap.fromTo(
-        underlineRef.current,
+      gsap.fromTo(underlineRef.current,
         { scaleX: 0, transformOrigin: "left" },
-        {
-          scaleX: 1,
-          duration: 0.5,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: underlineRef.current,
-            start: "top 85%",
-          },
-        }
+        { scaleX: 1, duration: 0.5, ease: "power2.out",
+          scrollTrigger: { trigger: underlineRef.current, start: "top 85%" } }
       );
 
-      // --- Heading ---
-      gsap.fromTo(
-        headingRef.current,
+      gsap.fromTo(headingRef.current,
         { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headingRef.current,
-            start: "top 85%",
-          },
-        }
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+          scrollTrigger: { trigger: headingRef.current, start: "top 85%" } }
       );
 
-      // --- Subheading ---
-      gsap.fromTo(
-        subRef.current,
+      gsap.fromTo(subRef.current,
         { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: subRef.current,
-            start: "top 88%",
-          },
-        }
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out",
+          scrollTrigger: { trigger: subRef.current, start: "top 88%" } }
       );
 
-      // --- Skill rows staggered ---
-      gsap.fromTo(
-        skillRowsRef.current,
-        { opacity: 0, x: -30 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: 0.12,
-          scrollTrigger: {
-            trigger: skillRowsRef.current[0],
-            start: "top 88%",
-          },
-        }
+      // Cards stagger in
+      gsap.fromTo(cardsRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12,
+          scrollTrigger: { trigger: cardsRef.current[0], start: "top 88%" } }
       );
+
+      // Skill bars animate width on scroll
+      barsRef.current.forEach((bar) => {
+        if (!bar) return;
+        const target = bar.dataset.level;
+        gsap.fromTo(bar,
+          { width: "0%" },
+          { width: `${target}%`, duration: 1.2, ease: "power3.out",
+            scrollTrigger: { trigger: bar, start: "top 92%" } }
+        );
+      });
     }, sectionRef);
 
     return () => {
@@ -164,7 +159,7 @@ export default function SkillsSection() {
 
       {/* Content */}
       <div className="flex-1 pl-8">
-        {/* Section label */}
+        {/* Label */}
         <p
           ref={labelRef}
           className="text-white/30 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
@@ -172,8 +167,6 @@ export default function SkillsSection() {
         >
           / CAPABILITIES
         </p>
-
-        {/* Underline */}
         <div
           ref={underlineRef}
           className="w-10 h-px bg-white/15 mb-10"
@@ -195,28 +188,77 @@ export default function SkillsSection() {
           A constellation of my core technical proficiencies across the stack.
         </p>
 
-        {/* Skills rows */}
-        <div className="flex flex-col gap-6">
-          {skills.map((row, i) => (
+        {/* Skill cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+          {skillCategories.map((cat, i) => (
             <div
               key={i}
-              ref={(el) => (skillRowsRef.current[i] = el)}
-              className="flex flex-wrap items-baseline gap-x-2 gap-y-1 text-[clamp(12px,1.5vw,15px)] opacity-0"
-              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              ref={(el) => (cardsRef.current[i] = el)}
+              className="bg-[#0f0f0f] border border-white/[0.07] p-5 flex flex-col gap-5 opacity-0 group hover:border-white/15 transition-colors duration-300"
             >
-              <span className="text-white font-semibold whitespace-nowrap">
-                {row.label}:
-              </span>
-              <span className="text-white/50 font-light">
-                {row.items.map((item, j) => (
-                  <span key={j}>
-                    <span className="text-white/55">{item}</span>
-                    {j < row.items.length - 1 && (
-                      <span className="text-white/20"> · </span>
-                    )}
-                  </span>
-                ))}
-              </span>
+              {/* Card header */}
+              <div className="flex items-start justify-between">
+                <div>
+                  <p
+                    className="text-white/20 text-[10px] tracking-[0.12em] uppercase m-0 mb-1"
+                    style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                  >
+                    {cat.id}
+                  </p>
+                  <h3 className="text-white text-[1.1rem] font-bold m-0 tracking-[-0.01em]">
+                    {cat.category}
+                  </h3>
+                </div>
+                {/* Category icon dot */}
+                <div className="w-8 h-8 border border-white/10 flex items-center justify-center group-hover:border-white/25 transition-colors duration-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
+                </div>
+              </div>
+
+              {/* Desc */}
+              <p
+                className="text-white/25 text-[11px] leading-[1.6] m-0"
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                {cat.desc}
+              </p>
+
+              {/* Skill bars */}
+              <div className="flex flex-col gap-3">
+                {cat.skills.map((skill, j) => {
+                  const barIndex = skillCategories
+                    .slice(0, i)
+                    .reduce((acc, c) => acc + c.skills.length, 0) + j;
+                  return (
+                    <div key={j} className="flex flex-col gap-1">
+                      <div className="flex items-center justify-between">
+                        <span
+                          className="text-white/55 text-[11px] tracking-[0.04em]"
+                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                        >
+                          {skill.name}
+                        </span>
+                        <span
+                          className="text-white/20 text-[10px]"
+                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                        >
+                          {skill.level}%
+                        </span>
+                      </div>
+                      {/* Track */}
+                      <div className="w-full h-px bg-white/[0.08] relative overflow-hidden">
+                        {/* Animated fill */}
+                        <div
+                          ref={(el) => (barsRef.current[barIndex] = el)}
+                          data-level={skill.level}
+                          className="absolute top-0 left-0 h-full bg-white/50"
+                          style={{ width: "0%" }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           ))}
         </div>
