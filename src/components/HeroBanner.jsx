@@ -77,10 +77,10 @@ export default function HeroBanner() {
       <div className="relative z-[2] max-w-[520px] flex flex-col gap-6 text-center md:text-left items-center md:items-start">
         <p
           ref={tagRef}
-          className="text-white/35 text-[11px] tracking-[0.1em] uppercase m-0 opacity-0"
+          className="text-white/45 text-[11px] tracking-[0.1em] uppercase m-0 opacity-0"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          // FRONTEND_DEVELOPER
+          // FULL_STACK_DEVELOPER
         </p>
 
         <h1
@@ -98,9 +98,9 @@ export default function HeroBanner() {
           className="m-0 text-[13px] leading-[1.8] text-white/50 font-light opacity-0"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          Frontend Developer focused on fast UIs, clean code,
+          Full-Stack Developer with a frontend focus — fast UIs, clean code,
           <br className="hidden md:block" />
-          and experiences that just work.
+          and APIs that don't get in the way.
         </p>
 
         <div
@@ -133,9 +133,12 @@ export default function HeroBanner() {
           className="absolute top-[8%] left-[-4%] bg-[#141414]/90 border border-white/[0.08] backdrop-blur-md px-3 py-2 z-[3] hidden md:block"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <span className="text-white/25 text-[9px] tracking-[0.08em] block mb-0.5">// COMPONENT</span>
+          <span className="text-white/28 text-[9px] tracking-[0.08em] block mb-0.5">// COMPONENT</span>
           <span className="text-white/60 text-[11px] tracking-[0.04em]">
-            &lt;Hero <span className="text-white/35">render</span>=<span className="text-green-400/80">true</span> /&gt;
+            &lt;Hero{" "}
+            <span className="text-white/35">render</span>=
+            <span className="text-green-400/80">true</span>{" "}
+            /&gt;
           </span>
         </div>
 
@@ -145,20 +148,20 @@ export default function HeroBanner() {
           className="absolute top-[20%] left-[3%] bg-[#0e0e0e]/90 border border-white/[0.07] backdrop-blur-md p-3 w-[190px] z-[4] hidden md:block"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <p className="text-white/25 text-[9px] tracking-[0.08em] m-0 mb-2">
+          <p className="text-white/28 text-[9px] tracking-[0.08em] m-0 mb-2">
             // STYLES.CSS
           </p>
           <div className="flex flex-col gap-0.5">
             <span className="text-white/50 text-[10.5px]">
-              <span className="text-white/30">display:</span>{" "}
+              <span className="text-white/32">display:</span>{" "}
               <span className="text-sky-400/70">flex</span>;
             </span>
             <span className="text-white/50 text-[10.5px]">
-              <span className="text-white/30">gap:</span>{" "}
+              <span className="text-white/32">gap:</span>{" "}
               <span className="text-orange-300/70">1rem</span>;
             </span>
             <span className="text-white/50 text-[10.5px]">
-              <span className="text-white/30">border-radius:</span>{" "}
+              <span className="text-white/32">border-radius:</span>{" "}
               <span className="text-orange-300/70">8px</span>;
             </span>
           </div>
@@ -189,7 +192,7 @@ export default function HeroBanner() {
           className="absolute bottom-[18%] right-[-3%] bg-[#141414]/90 border border-white/[0.08] backdrop-blur-md px-3 py-2 z-[3] hidden md:block"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <span className="text-white/25 text-[9px] tracking-[0.08em] block mb-1">// LIGHTHOUSE</span>
+          <span className="text-white/28 text-[9px] tracking-[0.08em] block mb-1">// LIGHTHOUSE</span>
           <span className="text-white/55 text-[11px] block">
             performance:{" "}
             <span className="text-green-400/80">98</span>
@@ -206,24 +209,24 @@ export default function HeroBanner() {
           className="absolute top-[52%] right-[-1%] bg-[#0e0e0e]/90 border border-white/[0.07] backdrop-blur-md px-3 py-1.5 z-[3] hidden md:block"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <span className="text-white/25 text-[9px] tracking-[0.08em] block mb-0.5">bundle.js</span>
+          <span className="text-white/28 text-[9px] tracking-[0.08em] block mb-0.5">bundle.js</span>
           <span className="text-white/55 text-[11px]">
             <span className="text-sky-400/70">42kb</span>{" "}
-            <span className="text-white/25">gzipped</span>
+            <span className="text-white/28">gzipped</span>
           </span>
         </div>
 
         {/* Labels */}
         <span
           ref={label1Ref}
-          className="absolute bottom-[4%] left-[8%] text-white/22 text-[9.5px] tracking-[0.1em] uppercase z-[3]"
+          className="absolute bottom-[4%] left-[8%] text-white/24 text-[9.5px] tracking-[0.1em] uppercase z-[3]"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
           ▣ Tailwind CSS
         </span>
         <span
           ref={label2Ref}
-          className="absolute bottom-[4%] right-[2%] text-white/22 text-[9.5px] tracking-[0.1em] uppercase z-[3]"
+          className="absolute bottom-[4%] right-[2%] text-white/24 text-[9.5px] tracking-[0.1em] uppercase z-[3]"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
           NEXT.JS_ENGINEER

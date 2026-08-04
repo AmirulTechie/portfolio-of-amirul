@@ -132,7 +132,7 @@ export default function ProjectsSection() {
       {/* Section label */}
       <p
         ref={labelRef}
-        className="text-white/30 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
+        className="text-white/45 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
         style={{ fontFamily: "'JetBrains Mono', monospace" }}
       >
         / SELECTED WORK
@@ -185,7 +185,7 @@ function ProjectCard({ project, cardRef }) {
             {project.title}
           </h3>
           <p
-            className="text-white/30 text-[10px] tracking-[0.12em] uppercase m-0"
+            className="text-white/45 text-[10px] tracking-[0.12em] uppercase m-0"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
             {project.tag}

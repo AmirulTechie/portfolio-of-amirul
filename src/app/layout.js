@@ -13,9 +13,29 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "Amirul | Full-Stack Developer";
+const description =
+  "Portfolio website of Amirul, a full-stack developer with a frontend focus, specializing in React, Next.js, and Node.js. Showcasing projects, skills, and experience in web development.";
+
 export const metadata = {
-  title: "Amirul | Front-end Developer",
-  description: "Portfolio website of Amirul, a passionate front-end developer specializing in React and Next.js. Showcasing projects, skills, and experience in web development.",
+  metadataBase: new URL("https://amiruldev.vercel.app"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "https://amiruldev.vercel.app",
+    siteName: "Amirul | Full-Stack Developer",
+    images: [{ url: "/amirul-islam.png", width: 1200, height: 1200 }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/amirul-islam.png"],
+  },
 };
 
 export default function RootLayout({ children }) {

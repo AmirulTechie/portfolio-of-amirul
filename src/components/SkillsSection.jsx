@@ -6,15 +6,21 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const TIERS = {
+  core: { label: "Core", dot: "bg-green-400/80", text: "text-white/70" },
+  comfortable: { label: "Comfortable", dot: "bg-sky-400/70", text: "text-white/55" },
+  exploring: { label: "Exploring", dot: "bg-orange-300/70", text: "text-white/45" },
+};
+
 const skillCategories = [
   {
     id: "01",
     category: "Language",
     desc: "The foundation everything is built on.",
     skills: [
-      { name: "HTML / CSS", level: 90 },
-      { name: "JavaScript", level: 85 },
-      { name: "TypeScript", level: 65 },
+      { name: "HTML / CSS", tier: "core" },
+      { name: "JavaScript", tier: "core" },
+      { name: "TypeScript", tier: "comfortable" },
     ],
   },
   {
@@ -22,10 +28,10 @@ const skillCategories = [
     category: "Frontend",
     desc: "Where logic meets the user's eye.",
     skills: [
-      { name: "React", level: 82 },
-      { name: "Next.js", level: 75 },
-      { name: "Tailwind CSS", level: 88 },
-      { name: "Framer Motion", level: 60 },
+      { name: "React", tier: "core" },
+      { name: "Next.js", tier: "comfortable" },
+      { name: "Tailwind CSS", tier: "core" },
+      { name: "Framer Motion", tier: "exploring" },
     ],
   },
   {
@@ -33,10 +39,10 @@ const skillCategories = [
     category: "Backend",
     desc: "The engine running under the hood.",
     skills: [
-      { name: "Node.js", level: 70 },
-      { name: "Express.js", level: 68 },
-      { name: "JWT / Auth", level: 65 },
-      { name: "REST API", level: 75 },
+      { name: "Node.js", tier: "comfortable" },
+      { name: "Express.js", tier: "comfortable" },
+      { name: "JWT / Auth", tier: "comfortable" },
+      { name: "REST API", tier: "comfortable" },
     ],
   },
   {
@@ -44,9 +50,9 @@ const skillCategories = [
     category: "Database",
     desc: "Storing and structuring data efficiently.",
     skills: [
-      { name: "MongoDB", level: 72 },
-      { name: "Mongoose", level: 70 },
-      { name: "PostgreSQL", level: 50 },
+      { name: "MongoDB", tier: "comfortable" },
+      { name: "Mongoose", tier: "comfortable" },
+      { name: "PostgreSQL", tier: "exploring" },
     ],
   },
   {
@@ -54,10 +60,10 @@ const skillCategories = [
     category: "Tools & Deployment",
     desc: "Shipping fast, deploying clean.",
     skills: [
-      { name: "Git / GitHub", level: 80 },
-      { name: "Vercel", level: 85 },
-      { name: "Render", level: 70 },
-      { name: "Figma", level: 60 },
+      { name: "Git / GitHub", tier: "core" },
+      { name: "Vercel", tier: "core" },
+      { name: "Render", tier: "comfortable" },
+      { name: "Figma", tier: "exploring" },
     ],
   },
 ];
@@ -70,7 +76,6 @@ export default function SkillsSection() {
   const headingRef = useRef(null);
   const subRef = useRef(null);
   const cardsRef = useRef([]);
-  const barsRef = useRef([]);
 
   useEffect(() => {
     // Scroll progress dot
@@ -117,17 +122,6 @@ export default function SkillsSection() {
         { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12,
           scrollTrigger: { trigger: cardsRef.current[0], start: "top 88%" } }
       );
-
-      // Skill bars animate width on scroll
-      barsRef.current.forEach((bar) => {
-        if (!bar) return;
-        const target = bar.dataset.level;
-        gsap.fromTo(bar,
-          { width: "0%" },
-          { width: `${target}%`, duration: 1.2, ease: "power3.out",
-            scrollTrigger: { trigger: bar, start: "top 92%" } }
-        );
-      });
     }, sectionRef);
 
     return () => {
@@ -162,7 +156,7 @@ export default function SkillsSection() {
         {/* Label */}
         <p
           ref={labelRef}
-          className="text-white/30 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
+          className="text-white/45 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
           / CAPABILITIES
@@ -182,7 +176,7 @@ export default function SkillsSection() {
 
         <p
           ref={subRef}
-          className="text-white/40 text-[13px] leading-[1.7] font-light m-0 mb-14 opacity-0"
+          className="text-white/50 text-[13px] leading-[1.7] font-light m-0 mb-14 opacity-0"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
           A constellation of my core technical proficiencies across the stack.
@@ -200,7 +194,7 @@ export default function SkillsSection() {
               <div className="flex items-start justify-between">
                 <div>
                   <p
-                    className="text-white/20 text-[10px] tracking-[0.12em] uppercase m-0 mb-1"
+                    className="text-white/35 text-[10px] tracking-[0.12em] uppercase m-0 mb-1"
                     style={{ fontFamily: "'JetBrains Mono', monospace" }}
                   >
                     {cat.id}
@@ -217,44 +211,31 @@ export default function SkillsSection() {
 
               {/* Desc */}
               <p
-                className="text-white/25 text-[11px] leading-[1.6] m-0"
+                className="text-white/50 text-[11px] leading-[1.6] m-0"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
                 {cat.desc}
               </p>
 
-              {/* Skill bars */}
-              <div className="flex flex-col gap-3">
+              {/* Skills */}
+              <div className="flex flex-col gap-2.5">
                 {cat.skills.map((skill, j) => {
-                  const barIndex = skillCategories
-                    .slice(0, i)
-                    .reduce((acc, c) => acc + c.skills.length, 0) + j;
+                  const tier = TIERS[skill.tier];
                   return (
-                    <div key={j} className="flex flex-col gap-1">
-                      <div className="flex items-center justify-between">
-                        <span
-                          className="text-white/55 text-[11px] tracking-[0.04em]"
-                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                        >
-                          {skill.name}
-                        </span>
-                        <span
-                          className="text-white/20 text-[10px]"
-                          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                        >
-                          {skill.level}%
-                        </span>
-                      </div>
-                      {/* Track */}
-                      <div className="w-full h-px bg-white/[0.08] relative overflow-hidden">
-                        {/* Animated fill */}
-                        <div
-                          ref={(el) => (barsRef.current[barIndex] = el)}
-                          data-level={skill.level}
-                          className="absolute top-0 left-0 h-full bg-white/50"
-                          style={{ width: "0%" }}
-                        />
-                      </div>
+                    <div key={j} className="flex items-center justify-between">
+                      <span
+                        className="text-white/55 text-[11px] tracking-[0.04em]"
+                        style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      >
+                        {skill.name}
+                      </span>
+                      <span
+                        className={`flex items-center gap-1.5 text-[9.5px] tracking-[0.1em] uppercase ${tier.text}`}
+                        style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      >
+                        <span className={`w-1.5 h-1.5 rounded-full ${tier.dot}`} />
+                        {tier.label}
+                      </span>
                     </div>
                   );
                 })}

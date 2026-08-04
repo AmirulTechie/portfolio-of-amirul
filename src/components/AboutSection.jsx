@@ -101,7 +101,7 @@ export default function AboutSection() {
       <div className="flex-1 flex flex-col">
         <p
           ref={labelRef}
-          className="text-white/30 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
+          className="text-white/45 text-[11px] tracking-[0.15em] uppercase m-0 mb-2 opacity-0"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
           02 / ABOUT
@@ -138,7 +138,7 @@ export default function AboutSection() {
             className="text-white/55 text-[13.5px] leading-[1.85] font-light m-0 opacity-0"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
-            I gravitate toward{" "}
+            I work full-stack, but I gravitate toward{" "}
             <span className="text-white/80">UI work and problem solving</span> —
             the kind of work where design meets logic. There's something
             satisfying about turning a blank screen into an interface that feels
@@ -171,7 +171,7 @@ export default function AboutSection() {
                 {s.value}
               </span>
               <span
-                className="text-white/30 text-[10px] tracking-[0.12em] uppercase"
+                className="text-white/45 text-[10px] tracking-[0.12em] uppercase"
                 style={{ fontFamily: "'JetBrains Mono', monospace" }}
               >
                 {s.label}
@@ -217,7 +217,7 @@ export default function AboutSection() {
               <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
             </div>
-            <span className="text-white/20 text-[10px] tracking-[0.08em]">
+            <span className="text-white/40 text-[10px] tracking-[0.08em]">
               about.js
             </span>
             <div className="w-10" />
@@ -225,7 +225,7 @@ export default function AboutSection() {
 
           {/* Code content */}
           <div className="p-5 text-[12px] leading-[1.9]">
-            <p className="m-0 text-white/20">about.js</p>
+            <p className="m-0 text-white/40">about.js</p>
             <p className="m-0 mt-2">
               <span className="text-sky-400/70">const</span>{" "}
               <span className="text-white/70">amirul</span>{" "}
@@ -234,25 +234,25 @@ export default function AboutSection() {
             </p>
             <div className="pl-5 flex flex-col">
               <p className="m-0">
-                <span className="text-white/40">role</span>
+                <span className="text-white/50">role</span>
                 <span className="text-white/20">:</span>{" "}
-                <span className="text-orange-300/70">"Frontend Developer"</span>
+                <span className="text-orange-300/70">"Full-Stack Developer"</span>
                 <span className="text-white/20">,</span>
               </p>
               <p className="m-0">
-                <span className="text-white/40">location</span>
+                <span className="text-white/50">location</span>
                 <span className="text-white/20">:</span>{" "}
                 <span className="text-orange-300/70">"Dhaka, Bangladesh"</span>
                 <span className="text-white/20">,</span>
               </p>
               <p className="m-0">
-                <span className="text-white/40">started</span>
+                <span className="text-white/50">started</span>
                 <span className="text-white/20">:</span>{" "}
                 <span className="text-sky-400/70">2025</span>
                 <span className="text-white/20">,</span>
               </p>
               <p className="m-0">
-                <span className="text-white/40">enjoys</span>
+                <span className="text-white/50">enjoys</span>
                 <span className="text-white/20">:</span>{" "}
                 <span className="text-white/20">[</span>
                 <span className="text-orange-300/70">"UI Work"</span>
@@ -261,7 +261,7 @@ export default function AboutSection() {
                 <span className="text-white/20">],</span>
               </p>
               <p className="m-0">
-                <span className="text-white/40">hobbies</span>
+                <span className="text-white/50">hobbies</span>
                 <span className="text-white/20">:</span>{" "}
                 <span className="text-white/20">[</span>
                 <span className="text-orange-300/70">"Gaming"</span>
@@ -270,7 +270,7 @@ export default function AboutSection() {
                 <span className="text-white/20">],</span>
               </p>
               <p className="m-0">
-                <span className="text-white/40">available</span>
+                <span className="text-white/50">available</span>
                 <span className="text-white/20">:</span>{" "}
                 <span className="text-green-400/70">true</span>
                 <span className="text-white/20">,</span>
@@ -293,7 +293,7 @@ export default function AboutSection() {
           className="border border-white/[0.07] bg-[#0f0f0f] p-4"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <p className="text-white/25 text-[9px] tracking-[0.12em] uppercase m-0 mb-3">
+          <p className="text-white/40 text-[9px] tracking-[0.12em] uppercase m-0 mb-3">
             CURRENTLY
           </p>
           <div className="flex flex-col gap-2.5">
